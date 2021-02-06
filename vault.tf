@@ -2,7 +2,7 @@ resource "helm_release" "vault-operator" {
   count            = var.install_vault ? 1 : 0
   name             = "vault-operator"
   chart            = "vault-operator"
-  namespace        = "jx-vault"
+  namespace        = "secret-infra"
   repository       = "https://kubernetes-charts.banzaicloud.com"
   version          = "1.10.0"
   create_namespace = true
@@ -12,7 +12,7 @@ resource "helm_release" "vault-instance" {
   count      = var.install_vault ? 1 : 0
   name       = "vault-instance"
   chart      = "vault-instance"
-  namespace  = "jx-vault"
+  namespace  = "secret-infra"
   repository = "https://storage.googleapis.com/jenkinsxio/charts"
   version    = "1.0.11"
   depends_on = [helm_release.vault-operator]
